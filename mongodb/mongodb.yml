@@ -1,0 +1,68 @@
+version: "3.6"
+services:
+    mongo1:
+        image: "mongo:3"
+        deploy:
+            placement:
+                constraints: [node.hostname == mongodb1]
+            restart_policy:
+                condition: any
+        volumes:
+            - /mongodata/mongodb/db:/mongodata/mongodb/db
+            - /mongodata/log/mongodb:/var/log/mongodb
+            - /mongodata/mongodb/mongodb.conf:/etc/mongod.conf
+            - /mongodata/mongodb/limits.conf:/etc/security/limits.conf
+            - /mongodata/mongodb/90-nproc.conf:/etc/security/limits.d/90-nproc.conf
+        hostname: mongo1
+        networks:
+            - mongoshard
+        command: ["/usr/bin/mongod","-f","/etc/mongod.conf"]
+        ports:
+            - mode: host
+              target: 27017
+              published: 27017
+    mongo2:
+        image: "mongo:3"
+        deploy:
+            placement:
+                constraints: [ node.hostname == mongodb2]
+            restart_policy:
+                condition: any
+        volumes:
+            - /mongodata/mongodb/db:/mongodata/mongodb/db
+            - /mongodata/log/mongodb:/var/log/mongodb
+            - /mongodata/mongodb/mongodb.conf:/etc/mongod.conf
+            - /mongodata/mongodb/limits.conf:/etc/security/limits.conf
+            - /mongodata/mongodb/90-nproc.conf:/etc/security/limits.d/90-nproc.conf
+        hostname: mongo2
+        networks:
+            - mongoshard
+        command: ["/usr/bin/mongod","-f","/etc/mongod.conf"]
+        ports:
+            - mode: host
+              target: 27017
+              published: 27017
+    mongo3:
+        image: "mongo:3"
+        deploy:
+            placement:
+                constraints: [ node.hostname == mongodb3]
+            restart_policy:
+                condition: any
+        volumes:
+            - /mongodata/mongodb/db:/mongodata/mongodb/db
+            - /mongodata/log/mongodb:/var/log/mongodb
+            - /mongodata/mongodb/mongodb.conf:/etc/mongod.conf
+            - /mongodata/mongodb/limits.conf:/etc/security/limits.conf
+            - /mongodata/mongodb/90-nproc.conf:/etc/security/limits.d/90-nproc.conf
+        hostname: mongo3
+        networks:
+            - mongoshard
+        command: ["/usr/bin/mongod","-f","/etc/mongod.conf"]
+        ports:
+            - mode: host
+              target: 27017
+              published: 27017
+networks:
+    mongoshard:
+        external: true
