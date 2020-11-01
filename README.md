@@ -1,9 +1,10 @@
 # Docker 101
 [![N|Solid](https://cdn.iconscout.com/icon/free/png-256/docker-1-282655.png)](https://www.docker.com/)
+
 [![Build Status](https://travis-ci.org/joemccann/dillinger.svg?branch=master)](https://travis-ci.org/joemccann/dillinger)
 
 Este repositorio se ha realizado para la documentacion y demostracion del uso de contenedores con dos aplicaciones diferentes.
--  Webserver con NodeJS (Authjs)
+-  Webserver con NodeJS (Authjs) by LintangWisesa
 -  MongoDB ReplicaSet
 
 Estas dos aplicaciones seran deployadas sobre Docker containers de la manera mas sencilla posible sobre Maquinas virtuales de Azure. 
@@ -76,11 +77,11 @@ Una vez que los worker nodes, se hayan unido, recibirá un mensaje como el sigui
 
 Crear una red de Docker:
 ```shell
-docker network create --driver overlay --attachable mongoshard 
+$ docker network create --driver overlay --attachable mongoshard 
 ```
 Iniciar el Docker Stack
 ```shell
-docker stack deploy -c /mongodata/mongodb/mongodb.yml mongoswarm
+$ docker stack deploy -c /mongodata/mongodb/mongodb.yml mongoswarm
 ```
 
 Hacer login en la Base de Datos:
